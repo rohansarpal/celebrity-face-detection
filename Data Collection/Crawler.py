@@ -17,9 +17,9 @@ mitFilter=True  #change to False to remove Filters
 filters = dict(type='photo',license='commercial,modify')
 howmany= 100
 names=pd.read_csv('path of csv file')
-l1=list(names.n)
-print(l1)
-subset=names.n
+#l1=list(names.n)
+#print(l1)
+subset=names.column_name     #Replace Column_name with actual name of column of csv where celebrity name are given
 print(subset)
 
 for keyword in subset:
