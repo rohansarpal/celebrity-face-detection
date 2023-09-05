@@ -25,8 +25,8 @@ import pandas as pd
 # VGG model requires 224*224 input so we are going to re-size all images
 IMAGE_SIZE = [224, 224]
 
-train_path = '/content/drive/MyDrive/valid2/train'
-valid_path = '/content/drive/MyDrive/valid2/test'
+train_path = 'path of training data'
+valid_path = 'path of test data'
 
 # example of progressively loading images from file
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -39,21 +39,21 @@ datagen = ImageDataGenerator(rescale = 1./255,
                              vertical_flip=True,
                              rotation_range=30) #every image will be randomly ratated 0-30 degree
 # prepare an iterators for each dataset
-train_it = datagen.flow_from_directory( '/content/drive/MyDrive/valid2/train',
+train_it = datagen.flow_from_directory( train_path,
                                        class_mode='categorical',
-                                       classes=['Alan Ritchson', 'Brie Larson', 'Charlize Theron', 'Helen Mirren', 'Jason Momoa', 'Jason Statham', 'John Cena', 'Jordana Brewster', 'Ludacris', 'Michelle Rodriguez', 'Nathalie Emmanuel', 'Scott Eastwood', 'Sung Kang', 'Tyrese Gibson', 'Vin Diesel'],
+                                       classes=['list of celebrities'],
                                        target_size=(224, 224),
                                        batch_size=2,
                                        seed=7)
-val_it = datagen.flow_from_directory('/content/drive/MyDrive/valid2/test',
+val_it = datagen.flow_from_directory(valid_path,
                                        class_mode='categorical',
-                                       classes=['Alan Ritchson', 'Brie Larson', 'Charlize Theron', 'Helen Mirren', 'Jason Momoa', 'Jason Statham', 'John Cena', 'Jordana Brewster', 'Ludacris', 'Michelle Rodriguez', 'Nathalie Emmanuel', 'Scott Eastwood', 'Sung Kang', 'Tyrese Gibson', 'Vin Diesel'],
+                                       classes=['list of celebrities'],
                                        target_size=(224, 224),
                                        batch_size=2,
                                        seed=7)
-test_it = datagen.flow_from_directory('/content/drive/MyDrive/valid2/test',
+test_it = datagen.flow_from_directory(valid_path,
                                        class_mode='categorical',
-                                       classes=['Alan Ritchson', 'Brie Larson', 'Charlize Theron', 'Helen Mirren', 'Jason Momoa', 'Jason Statham', 'John Cena', 'Jordana Brewster', 'Ludacris', 'Michelle Rodriguez', 'Nathalie Emmanuel', 'Scott Eastwood', 'Sung Kang', 'Tyrese Gibson', 'Vin Diesel'],
+                                       classes=['list of celebrities'],
                                        target_size=(224, 224),
                                        batch_size=2,
                                        seed=7)
@@ -74,7 +74,7 @@ for layer in vgg.layers:
 
 """# Add Our Layers at End of VGG16"""
 
-output_classes = 15
+output_classes = 15  # number catogories/celebrities
 
 # our layers - you can add more if you want
 x = Flatten()(vgg.output)
@@ -99,8 +99,8 @@ history_vgg= model.fit(
   epochs=5
 )
 
-model.save('model_vgg.h5')
-
+model.save('model_vgg.h5')  #name and path of model to be saved
+#graph to check over or under fitting
 import matplotlib.pyplot as plt
 plt.plot(history_vgg.history['loss'])
 plt.plot(history_vgg.history['val_loss'])
