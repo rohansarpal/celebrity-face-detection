@@ -23,13 +23,13 @@ image_height = 224
 model = load_model('model_vgg.h5')
 
 # the labels for the trained model
-with open("ResultsMap.pkl", 'rb') as f:
-    og_labels = pickle.load(f)
-    labels = {key:value for key,value in og_labels.items()}
-    print(labels)
+#with open("ResultsMap.pkl", 'rb') as f:
+ #   og_labels = pickle.load(f)
+ #   labels = {key:value for key,value in og_labels.items()}
+ #   print(labels)
+labels = {} # create dictionary for celebrities name like {0:abc,1:xyz}
 
-
-stream = cv2.VideoCapture('7.mp4')
+stream = cv2.VideoCapture('7.mp4')  #name and path of input video
 
 while(True):
     # Capture frame-by-frame
