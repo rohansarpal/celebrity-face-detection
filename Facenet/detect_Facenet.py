@@ -68,9 +68,9 @@ def detect(img ,detector,encoder,encoding_dict):
 if __name__ == "__main__":
     required_shape = (160,160)
     face_encoder = InceptionResNetV2()
-    path_m = "facenet_keras_weights.h5"
+    path_m = "facenet_keras_weights.h5"  # path of facenet_keras_weights.h5 downloaded by user
     face_encoder.load_weights(path_m)
-    encodings_path = 'encodings2.pkl'
+    encodings_path = 'encodings2.pkl'   #name and path of the encoding file created by train_v2.py
     face_detector = mtcnn.MTCNN()
     encoding_dict = load_pickle(encodings_path)
     
